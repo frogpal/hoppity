@@ -20,6 +20,7 @@ headers = {
 def main():
     while True:
         url = input("Enter URL: ")
+        start = time.perf_counter()
         soup = get_soup(url)
         assert soup.head is not None
         try:
@@ -33,6 +34,8 @@ def main():
         folder_name = get_title(soup)
         print("Page title: " + str(soup.head.title.get_text()))
         create_folder(folder_name, url, soup)
+        finish = time.perf_counter()
+        print(f"Finished in {round(finish - start, 2)} second(s).")
     else:
         print("No CSS found.")
 
